@@ -1,11 +1,6 @@
 const questions = [
 
-    {
-        title: 'BIENVENIDOS AL JUEGO DE PASAPALABRA DE SKYLAB CODERS ACADEMY!',
-        content: `Basado en el exitoso concurso de televisión Pasapalabra de Telecinco. <br> <br>
-        Las normas son muy sencillas: Se mostraran unas definiciones por pantalla y el usuario deberá responder con la palabra a la que corresponden. <br> <br>
-        El usuario tiene la opción de decir Pasapalabra y dejar esa definición para mas adelante. El programa es sensible a las acentuación, asi que se debe introducir la palabra sin tilde.`
-    },
+
 
     {
         letter: "a",
