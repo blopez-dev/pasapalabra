@@ -52,7 +52,8 @@ function inputWord (){
    return inputBox;
 }
 const onPlay = () => {
-    document.querySelector('.pasapalabra-controls').remove();
+    document.querySelector('.pasapalabra-wellcome').remove();
+    controls();
 
  }
 
@@ -75,7 +76,7 @@ function initPlay(titleType, contentInfo){
     contentComponent(contentInfo);
     const btnPlay = buttonComponent('Jugar', onPlay, 'primary');
     const wrapper_controls = document.createElement('div');
-    wrapper_controls.classList.add('pasapalabra-controls');
+    wrapper_controls.classList.add('pasapalabra-wellcome');
 
     wrapper_controls.appendChild( titleComponent(titleType));
     wrapper_controls.appendChild( contentComponent(contentInfo));
@@ -91,17 +92,39 @@ function printGame(listingLetters, renderContent){
     printLetterGame.appendChild(donutWords);
     printLetterGame.appendChild(infoContent);
 }
-function showQuestions(){
+
+function controls(){
+    const wrapperControls = document.createElement('div');
+    wrapperControls.classList.add('pasapalabra-controls');
+    const answerQuestion = inputWord();
+    const sendAnswer = buttonComponent('ENVIAR', onSend, 'succes');
+    const passToWord = buttonComponent('PASAPALABRA', onPassToWord, 'primary');
+    const showControlsGame = document.querySelector('.panelGame');
+
+    wrapperControls.appendChild(answerQuestion);
+    wrapperControls.appendChild(sendAnswer);
+    wrapperControls.appendChild(passToWord);
+    
+    showControlsGame.appendChild(wrapperControls);
 
 }
-function showEachQuestions(questions, counter){
-   questions.forEach(item => {
-       const numberQuestions = tryQuestion();
-       const questionItem =(questions[counter].questions[numberQuestions].question)
-       const questionAnswer =(questions[counter].questions[numberQuestions].answer);
-       const questionStatus =(questions[counter].status);
-       return [questionStatus, questionAnswer, questionItem];
-   })
+
+
+function showQuestions(questions, counter){
+    const notAnsweredQuestions = questions.filter(item => item.status === 0);
+
+    if(notAnsweredQuestions.length >= 1){
+        const [question, writeAnswer, sendAnswer, passToWord] = showEachQuestions(notAnsweredQuestions, counter);
+    }
+}
+function showEachQuestions(questionsList, counter){
+    const selectQuestion = tryQuestion();
+    const question = questionsList[counter].questions[selectQuestion].question;
+    const writeAnswer = inputWord();
+    const sendAnswer = buttonComponent('ENVIAR', onSend, 'success');
+    const passToWord = buttonComponent('PASAPALABRA', onSend, 'primary');
+    document.getElementsByClassName('panelGame').innerHTML = question;
+    return [question, writeAnswer, sendAnswer, passToWord];
 }
 
 function play(){
@@ -109,7 +132,7 @@ function play(){
     const counter = 0;
     const listLetters = listingLetters(letters);
     const controls = initPlay(titleGame, infoGame);
-    showEachQuestions(arrayQuestions, counter)
+    showQuestions(arrayQuestions, counter)
     printGame(listLetters, controls);
 }
 function initGame(status, answer, question){

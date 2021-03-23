@@ -120,7 +120,7 @@ ul > li {padding:5px; margin:10px;}
 .wrapper-letters .letter:nth-child(26){transform:rotate(603deg) translate(278px) rotate(-603deg)}
 .wrapper-letters .letter:last-child{transform:rotate(616.4deg) translate(278px) rotate(-616.4deg)}
 
-.pasapalabra-controls{
+.pasapalabra-wellcome{
     display:flex;
     flex-flow:column wrap;
     justify-content: center;
@@ -128,19 +128,25 @@ ul > li {padding:5px; margin:10px;}
     min-height: 100%;
     color:var( --primary-color);
 }
-.pasapalabra-controls .subtitle{
+.pasapalabra-wellcome .subtitle{
     font-size: 1.2em;
     line-height: 1.4em;
     margin:10px 0;
 }
-.pasapalabra-controls p{
+.pasapalabra-wellcome p{
     font-size: 1em;
     line-height: 1.3em;
     max-width: 80%;
 }
-
 .hidden{
     display: none;
+}
+
+.pasapalabra-controls{
+    display:flex;
+    flex-flow:row wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 
