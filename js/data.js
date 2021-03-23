@@ -13,9 +13,7 @@ const questions = [
         questions: [
             {answer: "anillo", question: "Con la A. Elemento circular metálico. Propio de las bodas"},
             {answer: "adornar", question: "Con la A. Embellecer  o hacer que algo resulte más bonito y agradable."},
-            {
-                answer: "amargo",
-                question: "Con la A. Que tiene el sabor característico de la hiel, de la quinina y de otros alcaloides"
+            {answer: "amargo", question: "Con la A. Que tiene el sabor característico de la hiel, de la quinina y de otros alcaloides"
             }
         ],
     },
@@ -61,10 +59,7 @@ const questions = [
         questions: [
             {answer: "delito", question: "Con la D. Acción u omisión voluntaria, castigada por la ley con pena grave:"},
             {answer: "democrático", question: "Con la D. De la democracia o relacionada con ella:"},
-            {
-                answer: "diabetes",
-                question: "Con la D. Enfermedad causada por un desorden de nutrición y que se caracteriza por una concentración excesiva de azúcar en la sangre:"
-            }
+            {answer: "diabetes", question: "Con la D. Enfermedad causada por un desorden de nutrición y que se caracteriza por una concentración excesiva de azúcar en la sangre:"}
         ],
     },
     {
