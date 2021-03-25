@@ -176,5 +176,16 @@ ul > li {padding:5px; margin:10px;}
 
 }
 
+.correct {
+    background: green;
+    background-image: none !important;
+}
+
+.incorrect {
+    background: red;
+    background-image: none !important;
+
+}
+
 
 

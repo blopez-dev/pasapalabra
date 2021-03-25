@@ -3,21 +3,33 @@
 
 
  function tryQuestion(){
-     let index;
-     return index = Math.floor(Math.random() * (0-3) + 3);
+     return  Math.floor(Math.random() * (0-3) + 3);
  }
  function getQuestions(arrayQuestions){
      const dataQuestion = [];
-     const counterQuestions = 0;
+     const counter = { number: 0 };
+
+     const updateCurrentQuestion = () => {
+        const questions = dataQuestion.slice(0, counter.number + 1);
+         const questions2 = dataQuestion.slice(counter.number + 1);
+         const foundArray = [ ...questions2, ...questions];
+
+         const nextQuestion = foundArray.find(({ status }) => status === 0);
+        if(nextQuestion) {
+            counter.number = dataQuestion.findIndex(({ letter }) => letter === nextQuestion.letter);
+        } else {
+            alert('Final')
+        }
+     }
 
      arrayQuestions.forEach(item => {
          const indexQuestion = tryQuestion();
-         const {status, questions} = item;
+         const {status, questions, letter} = item;
          const answer = questions[indexQuestion].answer;
          const question = questions[indexQuestion].question;
-         dataQuestion.push({'status': status, 'answer': answer, 'question':question})
+         dataQuestion.push({'status': status, 'answer': answer, 'question':question, letter})
      })
-     return [dataQuestion, counterQuestions]
+     return [dataQuestion, counter, updateCurrentQuestion]
 
  }
 
@@ -33,28 +45,57 @@
  }
 function showQuestions(questionsList, counter){
         const getWrapperQuestions = document.querySelector('.definition');
-        const unansweredQuestions = questionsList.filter(item => item.status === 0);
-        if(unansweredQuestions.length >=1){
-            printQuestion(unansweredQuestions, counter, getWrapperQuestions);
-        }
+        printQuestion(questionsList, counter, getWrapperQuestions);
 }
 
 function printQuestion(questions, counter, wrapper){
-
      if(counter < questions.length){
-         wrapper.innerHTML = questions[counter].question
+         const itemQuestion = document.createElement('h2');
+         itemQuestion.classList.add('item-questions');
+         itemQuestion.innerHTML = questions[counter].question;
+         wrapper.appendChild(itemQuestion);
      }
 }
 
+function passWord(questionList, counter){
+     document.querySelector('.item-questions').remove();
+     showQuestions(questionList, counter);
+}
 
-function initGame(){
-    const [arrayQuestions, counterQuestion] = getQuestions(questions);
-    const play = document.getElementById('playBtn');
-    play.addEventListener('click', function(){
-        playGame(arrayQuestions, counterQuestion);
+function updateQuestionBullets (questions) {
+     const passWordButton = document.querySelectorAll('.js-question-bullets li');
+
+    questions.forEach(({ status }, index) => {
+        if(status !== 0) {
+            const className = status === 1 ? 'correct' : 'incorrect';
+            passWordButton[index].classList.add(className);
+        }
     });
+ }
 
-    return [arrayQuestions, counterQuestion];
+ function initGame(){
+    const [arrayQuestions, counterQuestion, addCounter] = getQuestions(questions);
+    const play = document.getElementById('playBtn');
+    const passWordButton = document.querySelector('.js-pass-to-word');
+    const enterButton = document.querySelector('.js-enter');
+    const enteredWord = document.querySelector('.js-word');
 
+    play.addEventListener('click', function(){
+        playGame(arrayQuestions, counterQuestion.number);
+    });
+    passWordButton.addEventListener('click', function(){
+        addCounter();
+        passWord(arrayQuestions, counterQuestion.number);
+    });
+     enterButton.addEventListener('click', function(){
+         const { answer } = arrayQuestions[counterQuestion.number];
+         const word = enteredWord.value;
+         arrayQuestions[counterQuestion.number].status = word === answer ? 1 : 2;
+
+         console.log(counterQuestion)
+         addCounter();
+         passWord(arrayQuestions, counterQuestion.number);
+         updateQuestionBullets(arrayQuestions);
+    });
 }
 window.onload = initGame;

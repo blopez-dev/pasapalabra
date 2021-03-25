@@ -1,7 +1,6 @@
 const questions = [
 
 
-
     {
         letter: "a",
         status: 0,
