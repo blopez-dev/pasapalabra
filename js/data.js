@@ -286,7 +286,6 @@ const questions = [
             }
         ],
     },
-
     {
         letter: "u",
         status: 0,

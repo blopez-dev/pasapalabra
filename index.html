@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/style.css">
     <title>PASAPALABRA | GAME</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </head>
 <body>
 <div id="app">
@@ -47,7 +48,7 @@
                 <li class="item">y</li>
                 <li class="item">z</li>
             </ul>
-            <div class="js-countdown">5</div>
+            <div class="js-countdown"></div>
         </div>
         <div class="col">
             <div class="wellcome-game">
@@ -55,7 +56,7 @@
                 <p>Basado en el exitoso concurso de televisión Pasapalabra de Telecinco, las normas son muy sencillas:<br><br>Se mostraran unas definiciones por pantalla y el usuario deberá responder con la palabra a la que corresponden. El usuario tiene la opción de decir Pasapalabra y dejar esa definición para mas adelante.<br><br>El programa es sensible a las acentuación, asi que se debe introducir la palabra sin tilde.<br>Es posible utilizar la tecla ENTER para enviar la palabra y el SPACE para hacer pasapalabra.</p>
                 <button id="playBtn" class="btn primary">Jugar!</button>
             </div>
-            <div class="panel-game hidden">
+            <div class="panel-game js-panel-game">
                 <div class="definition"></div>
                 <div class="controls">
                     <input type="text" placeholder="Introduce tu respuesta" class="answer-input js-word">
