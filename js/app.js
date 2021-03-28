@@ -1,5 +1,4 @@
 import questions from "./data.js";
-import data from "./data.js";
 
 const gameStatus = {
     interval: null,
@@ -33,9 +32,12 @@ function getUser() {
     } else {
         document.querySelector('.intro-user').classList.add('hidden');
         document.querySelector('.wellcome-game').classList.remove('hidden');
+
     }
     gameStatus.userName = userName;
+    document.querySelector('.js-user').value = '';
     gameStatus.questions = getQuestions(questions, userName);
+
 }
 
 function tryQuestion() {
@@ -75,16 +77,35 @@ function playGame() {
 
     showQuestions();
 }
+const wrapperPlayers = document.querySelector('#my-template .insert-players');
+
+function tableRanking(playersRanking){
+    wrapperPlayers.innerHTML = '';
+    const table = document.createElement('table');
+    table.classList.add('table-ranking');
+    table.innerHTML = `<thead><th>Position</th><th>Player</th><th>Points</th></thead>`;
+    playersRanking.forEach((item, index) => {
+        let row = document.createElement('tr');
+        let column = `<td>${index +=1}</td><td>${item.userName}</td><td>${item.correctQuestion}</td>`
+        row.innerHTML = column;
+        table.appendChild(row);
+    })
+
+    wrapperPlayers.appendChild(table);
+}
 
 const players = [];
-
+const playersRow = [];
 function rankingPlayers(userName, correctQuestion) {
-    console.log(userName, correctQuestion)
+
     userName && players.push({userName, correctQuestion});
     players.sort((a, b) => (a.correctQuestion < b.correctQuestion) ? 1 : -1);
-    players.forEach((item, index) => {
-        console.log(`Position:,  ${index += 1}, Player Name: ${item.userName}, Points: ${item.correctQuestion} `)
+
+    console.log(players)
+   players.forEach((item, index) => {
+   console.log(`Posición: ${index += 1}, Player Name: ${item.userName}, Points: ${item.correctQuestion} `)
     })
+    tableRanking(players)
     return players;
 }
 
@@ -92,15 +113,21 @@ function endGame(arrayFinalized) {
     const [arrayQuestions] = gameStatus.questions;
     const correctAnswered = arrayQuestions.filter(({status}) => status === 1);
     const userPoints = correctAnswered.length;
+
     rankingPlayers(gameStatus.userName, userPoints);
     resetGame(arrayFinalized);
     const isRestartGame = window.confirm('Do you like restart game?');
-
     if (isRestartGame) gameStatus.resetGame();
+    const showRankgin = document.querySelector('.insertRankingPlayers');
+    showRankgin.classList.toggle('hidden');
+    Swal.fire({
+        template: '#my-template'
+    })
 }
 
 function resetGame(questions) {
     questions.forEach((item) => item.status = 0);
+
     updateQuestionBullets(questions);
     showIntro();
 }
@@ -134,8 +161,8 @@ function updateQuestionBullets(questions) {
             passWordButton[index].classList.add(className);
         }
         if (status === 0) {
-            const className = status === 1 ? 'correct' : 'incorrect';
-            passWordButton[index].classList.remove(className);
+            passWordButton[index].classList.remove('correct');
+            passWordButton[index].classList.remove('incorrect');
         }
     });
 }
@@ -186,17 +213,20 @@ function registerEvents() {
     enterButton.addEventListener('click', function () {
         const [arrayQuestions, counterQuestion, addCounter] = gameStatus.questions;
         const {answer} = arrayQuestions[counterQuestion.number];
-        const word = enteredWord.value;
+        const word = enteredWord.value.toLowerCase();
         arrayQuestions[counterQuestion.number].status = word === answer ? 1 : 2;
+
         addCounter();
         passWord(arrayQuestions, counterQuestion.number);
         updateQuestionBullets(arrayQuestions);
+        enteredWord.value = '';
+
     });
     enteredWord.addEventListener('keyup', function (event) {
         const [arrayQuestions, counterQuestion, addCounter] = gameStatus.questions;
         if (event.key === 'Enter') {
             const {answer} = arrayQuestions[counterQuestion.number];
-            const word = enteredWord.value;
+            const word = enteredWord.value.toLowerCase();
             arrayQuestions[counterQuestion.number].status = word === answer ? 1 : 2;
             addCounter();
             passWord(arrayQuestions, counterQuestion.number);
@@ -217,9 +247,3 @@ window.onload = () => {
     showIntro();
 };
 
-Swal.fire({
-    title: 'Error!',
-    text: 'Do you want to continue',
-    icon: 'error',
-    confirmButtonText: 'Cool'
-})

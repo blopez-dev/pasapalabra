@@ -49,6 +49,15 @@
                 <li class="item">z</li>
             </ul>
             <div class="js-countdown"></div>
+            <div class="insertRankingPlayers">
+
+                <div id="my-template">
+                    <swal-title>Ranking de jugadores</swal-title>
+                    <swal-html class="insert-players"></swal-html>
+                    <swal-param name="allowEscapeKey" value="false" />
+                    <swal-param name="customClass" value='{ "popup": "my-popup" }' />
+                </div>
+            </div>
         </div>
         <div class="col">
             <div class="wellcome-game">
@@ -62,6 +71,7 @@
                     <input type="text" placeholder="Introduce tu respuesta" class="answer-input js-word">
                     <button class="btn succes js-enter">ENVIAR</button>
                     <button class="btn primary js-pass-to-word">PASAPALABRA</button>
+                    <button class="btn warning js-end-to-game">Finalizar Juego</button>
                 </div>
                 <div class="js-failed"></div>
             </div>
