@@ -15,7 +15,7 @@ ul {list-style: none;}
 ul > li {padding:5px; margin:10px;}
 .btn{
     display: inline-block;
-    margin:25px 15px;
+    margin:25px 15px 25px 0px;
     padding: .25em .5em;
     border: 2px solid var(--primary-color);
     border-radius: 3px;
@@ -41,7 +41,39 @@ ul > li {padding:5px; margin:10px;}
     min-height: 100vh;
 
 }
+.intro-user{
+    display:flex;
+    flex-flow:column wrap;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    min-width: 100vw;
+    min-height:100vh;
+    z-index: 99;
+    background-image:radial-gradient(circle, #0074d9, #004b8d);
+    color:#fff
 
+;}
+.ask-play{
+    display:block;
+    margin:20px auto;
+}
+.js-failed{
+    display: block;
+    font-size: 1.3em;
+    color: #fff;
+}
+.intro-user input{
+    position:relative;
+    display:inline-block;
+    margin: 25px 15px 25px 0px;
+    padding: .35em .5em;
+    border-radius: 3px;
+    font-size: 1.3em;
+    line-height: 1.6em;
+    box-shadow: none;
+    border:0;
+}
 .wrapper-content{
     display:flex;
     flex-flow: row wrap;
@@ -63,6 +95,10 @@ ul > li {padding:5px; margin:10px;}
     min-height: 100vh;
     padding: 20px;
 }
+
+.col.donut-words{
+    justify-content: flex-end;
+}
 .wrapper-letters{
     position:absolute;
     left: 50%;
@@ -75,6 +111,7 @@ ul > li {padding:5px; margin:10px;}
     background-color:transparent;
     margin:0 auto;
     transform: translate(-50%, -50%);
+
 }
 #app .wrapper-letters:before{
     display:block;
@@ -153,29 +190,45 @@ ul > li {padding:5px; margin:10px;}
     max-width: 80%;
     margin:20px 0px;
 }
-.hidden{
-    display: none !important;
+.definition{
+    display:block;
+    width:100%;
+    min-height:60px;
+}
+.item-questions{
+    color: var(--primary-color);
 }
 
 .panel-game, .controls{
     display:flex;
     flex-flow:row wrap;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 .controls input{
     position:relative;
     display:inline-block;
-    margin: 25px 15px;
+    margin: 25px 15px 25px 0px;
     padding: .35em .5em;
     border-radius: 3px;
     font-size: 1.3em;
     line-height: 1.6em;
     box-shadow: none;
     border:0;
-
 }
-
+.js-countdown{
+    display: block;
+    width: auto;
+    border: 2px solid var(--primary-color);
+    text-align: center;
+    min-width: 50px;
+    min-height: 50px;
+    font-size: 1.3em;
+    color: var( --primary-color);
+    line-height: 2.3em;
+    background: linear-gradient( 45deg, #0074d9, #004b8dbf);
+    margin-bottom:5%;
+}
 .correct {
     background: green;
     background-image: none !important;
@@ -184,7 +237,9 @@ ul > li {padding:5px; margin:10px;}
 .incorrect {
     background: red;
     background-image: none !important;
-
+}
+.hidden{
+    display: none !important;
 }
 
 

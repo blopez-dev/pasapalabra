@@ -10,6 +10,12 @@
 </head>
 <body>
 <div id="app">
+    <div class="intro-user">
+        <h1 class="js-start">BIENVENIDO A PASALABRA</h1>
+        <h3 class="ask-play">¿Quieres jugar?, introduce tu nombre</h3>
+        <input type="text" class="js-user" placeholder="Introduce tu nombre">
+        <button class="js-submit btn succes">Comenzar!</button>
+    </div>
     <div class="wrapper-content">
         <div class="col donut-words">
             <ul class="wrapper-letters js-question-bullets">
@@ -41,6 +47,7 @@
                 <li class="item">y</li>
                 <li class="item">z</li>
             </ul>
+            <div class="js-countdown">5</div>
         </div>
         <div class="col">
             <div class="wellcome-game">
@@ -51,10 +58,15 @@
             <div class="panel-game hidden">
                 <div class="definition"></div>
                 <div class="controls">
-                    <input type="text" placeholder="Introduce tu respuesta" class="answer-intpu js-word">
+                    <input type="text" placeholder="Introduce tu respuesta" class="answer-input js-word">
                     <button class="btn succes js-enter">ENVIAR</button>
                     <button class="btn primary js-pass-to-word">PASAPALABRA</button>
                 </div>
+                <div class="js-failed"></div>
+            </div>
+            <div class="endgame hidden">
+                <h2>Fin de partida!</h2>
+                <button  class="btn primary js-new-game">Jugar de Nuevo!</button>
             </div>
         </div>
     </div>
