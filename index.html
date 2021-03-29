@@ -79,6 +79,18 @@
                 <h2>Fin de partida!</h2>
                 <button  class="btn primary js-new-game">Jugar de Nuevo!</button>
             </div>
+            <div class="js-finishTime">
+                <template id="endTime">
+                    <swal-title>
+                        Se agotó el tiempo
+                    </swal-title>
+                    <swal-icon type="warning" color="red"></swal-icon>
+                    <swal-button type="confirm" class="js-restart-endTime"> Empezar de nuevo</swal-button>
+
+                    <swal-param name="allowEscapeKey" value="false" />
+                    <swal-param name="customClass" value='{ "popup": "my-popup" }' />
+                </template>
+            </div>
         </div>
     </div>
 </div>

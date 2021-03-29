@@ -220,33 +220,67 @@ ul > li {padding:5px; margin:10px;}
     border:0;
 }
 .js-countdown{
-    display: block;
-    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 2px solid var(--primary-color);
     text-align: center;
-    min-width: 50px;
-    min-height: 50px;
+    min-width: 70px;
+    min-height: 70px;
     font-size: 1.3em;
     color: var( --primary-color);
     line-height: 2.3em;
     background: linear-gradient( 45deg, #0074d9, #004b8dbf);
     margin-bottom:5%;
+    border-radius: 50%;
 }
 .correct {
-    background: green;
-    background-image: none !important;
+    transition: all 0.9s ease-in-out !important;
+    background-image: radial-gradient(circle, #23e068, #039f4b) !important;
 }
 
 .incorrect {
-    background: red;
-    background-image: none !important;
+    transition: all 0.9s ease-in-out !important;
+    background-image: radial-gradient(circle, #ad292b, #7c0d10) !important;
 }
 .hidden{
     display: none !important;
 }
+
+.swal2-popup{
+    width:50em;
+    background-color:var(--btn-primary);
+}
+.swal2-content{margin:0; padding:0;}
+.swal2-title{font-size:1.3em; margin: 0 0 1em;}
+.swal2-icon{margin:7px auto !important;}
+.swal2-icon.swal2-warning{
+    color:var(--btn-primary) !important;
+    border-color: var(--btn-primary) !important;
+}
 .insertRankingPlayers{position: absolute;bottom:100%;}
-.table-ranking{width:100%;}
-.table-ranking thead{}
-.table-ranking thead th{}
+.table-ranking{
+    width:100%;
+    background-color:#212529;
+}
+.table-ranking thead{
+    background-color:#212529;
+    color:var(--primary-color);
+    border-bottom: 1px solid #fff !important;
+    margin-bottom: 15px;
+
+}
+.table-ranking thead th{
+    font-size: 1em;
+    line-height: 2.6em;
+}
+.table-ranking tbody{
+    background-color:#212529;
+    color:var(--primary-color);
+}
+.table-ranking tbody tr td{
+    font-size: 1.2em;
+    line-height: 1.8em;
+}
 
 

@@ -1,5 +1,6 @@
 import questions from "./data.js";
 
+
 const gameStatus = {
     interval: null,
     time: 120,
@@ -82,11 +83,12 @@ const wrapperPlayers = document.querySelector('#my-template .insert-players');
 function tableRanking(playersRanking){
     wrapperPlayers.innerHTML = '';
     const table = document.createElement('table');
-    table.classList.add('table-ranking');
-    table.innerHTML = `<thead><th>Position</th><th>Player</th><th>Points</th></thead>`;
+    table.classList.add('table-ranking' );
+    const thTable = `<thead><th>Position</th><th>Player</th><th>Points</th></thead>`;
+    table.innerHTML = thTable;
     playersRanking.forEach((item, index) => {
         let row = document.createElement('tr');
-        let column = `<td>${index +=1}</td><td>${item.userName}</td><td>${item.correctQuestion}</td>`
+        let column = `<td>${index += 1}</td><td>${item.userName}</td><td>${item.correctQuestion}</td>`
         row.innerHTML = column;
         table.appendChild(row);
     })
@@ -113,13 +115,19 @@ function endGame(arrayFinalized) {
     const [arrayQuestions] = gameStatus.questions;
     const correctAnswered = arrayQuestions.filter(({status}) => status === 1);
     const userPoints = correctAnswered.length;
+    console.log('%c Rankin players -> ', 'background: #222; color: #bada55')
+
+
 
     rankingPlayers(gameStatus.userName, userPoints);
+
+
     resetGame(arrayFinalized);
     const isRestartGame = window.confirm('Do you like restart game?');
-    if (isRestartGame) gameStatus.resetGame();
-    const showRankgin = document.querySelector('.insertRankingPlayers');
-    showRankgin.classList.toggle('hidden');
+
+    if (isRestartGame) {
+        gameStatus.resetGame();
+    }
     Swal.fire({
         template: '#my-template'
     })
@@ -127,7 +135,6 @@ function endGame(arrayFinalized) {
 
 function resetGame(questions) {
     questions.forEach((item) => item.status = 0);
-
     updateQuestionBullets(questions);
     showIntro();
 }
@@ -179,7 +186,7 @@ function displayTime(seconds) {
 function endTime() {
     const time = document.querySelector('.js-countdown');
     time.innerHTML = '0';
-    endGame();
+   /* endGame();*/
 }
 
 function registerEvents() {
@@ -188,19 +195,31 @@ function registerEvents() {
     const enterButton = document.querySelector('.js-enter');
     const enteredWord = document.querySelector('.js-word');
     const submitName = document.querySelector('.js-submit');
+    const inputName = document.querySelector('.js-user');
+    const finalizedGame = document.querySelector('.js-end-to-game');
+    const restartEndTime = document.querySelector('.js-restart-endTime');
 
     submitName.addEventListener('click', function () {
         getUser()
     });
-
+    inputName.addEventListener('keyup', function(event){
+        if (event.key === 'Enter') {
+            getUser()
+        }
+    })
     play.addEventListener('click', function () {
         playGame();
         toggleGamePanel();
         gameStatus.interval = setInterval(() => {
             gameStatus.time--;
             displayTime(gameStatus.time);
-            if (gameStatus.time <= 0 || gameStatus.time < 1) {
-                endTime();
+            if (gameStatus.time <= 0) {
+                Swal.fire({
+                    template: '#endTime'
+                })
+                endTime(gameStatus.questions);
+                gameStatus.resetGame();
+                resetGame(questions);
                 clearInterval(gameStatus.interval);
             }
         }, 1000)
@@ -238,6 +257,26 @@ function registerEvents() {
             passWord(arrayQuestions, counterQuestion.number);
             updateQuestionBullets(arrayQuestions);
         }
+    })
+    finalizedGame.addEventListener('click', function(){
+       endTime(gameStatus.questions);
+       const arrayFinalized = gameStatus.questions[0];
+       let pointsFinalized = 0;
+       arrayFinalized.filter(item => {
+           item.status === 1 ? pointsFinalized += 1: undefined;
+       });
+
+
+
+
+        Swal.fire({
+            title: 'Has Finalizado el juego',
+            text: `Has acertado ${pointsFinalized.toString()} preguntas`,
+        })
+        gameStatus.resetGame();
+        resetGame(questions);
+        clearInterval(gameStatus.interval);
+
     })
 
 }
