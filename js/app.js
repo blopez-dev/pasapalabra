@@ -29,7 +29,18 @@ function showIntro() {
 function getUser() {
     const userName = document.querySelector('.js-user').value;
     if (userName === '' || userName === undefined) {
-        alert('Has de introducir un nombre para poder jugar')
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 300,
+            timerProgressBar: true,
+        })
+
+        Toast.fire({
+            icon: 'error',
+            title: 'Debes insertar un nombre'
+        })
     } else {
         document.querySelector('.intro-user').classList.add('hidden');
         document.querySelector('.wellcome-game').classList.remove('hidden');
